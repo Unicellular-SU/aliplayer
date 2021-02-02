@@ -1,0 +1,49 @@
+PODS:
+  - aliplayer (0.0.1):
+    - AliPlayerSDK_iOS (~> 5.3.0)
+    - Flutter
+  - AliPlayerSDK_iOS (5.3.0):
+    - AliPlayerSDK_iOS/AliPlayerSDK (= 5.3.0)
+  - AliPlayerSDK_iOS/AliPlayerSDK (5.3.0)
+  - Flutter (1.0.0)
+  - orientation (0.0.1):
+    - Flutter
+  - screen (0.0.1):
+    - Flutter
+  - volume_control (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - aliplayer (from `.symlinks/plugins/aliplayer/ios`)
+  - Flutter (from `Flutter`)
+  - orientation (from `.symlinks/plugins/orientation/ios`)
+  - screen (from `.symlinks/plugins/screen/ios`)
+  - volume_control (from `.symlinks/plugins/volume_control/ios`)
+
+SPEC REPOS:
+  trunk:
+    - AliPlayerSDK_iOS
+
+EXTERNAL SOURCES:
+  aliplayer:
+    :path: ".symlinks/plugins/aliplayer/ios"
+  Flutter:
+    :path: Flutter
+  orientation:
+    :path: ".symlinks/plugins/orientation/ios"
+  screen:
+    :path: ".symlinks/plugins/screen/ios"
+  volume_control:
+    :path: ".symlinks/plugins/volume_control/ios"
+
+SPEC CHECKSUMS:
+  aliplayer: 4ffeb7dd8048f3e6327d4910c3ff588765b9ad52
+  AliPlayerSDK_iOS: 2b9a485672f9da87fd651a4424d2f5b873d5b50e
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  orientation: 6c9203efe86ce4cff379756910f18b2d745628c3
+  screen: abd91ca7bf3426e1cc3646d27e9b2358d6bf07b0
+  volume_control: ae2b373c092d9ff5e57f704e9fa5e3098cc16d07
+
+PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
+
+COCOAPODS: 1.8.3
