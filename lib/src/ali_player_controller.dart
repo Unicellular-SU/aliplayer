@@ -4,7 +4,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:orientation/orientation.dart';
 import 'package:screen/screen.dart';
 
 import '../aliplayer.dart';
@@ -96,7 +95,7 @@ class AliPlayerController extends ValueNotifier<AliPlayerValue> {
 
   int qualityIndex = 0;
 
-  static DeviceOrientation _currentOrientation;
+  // static DeviceOrientation _currentOrientation;
 
   Future<void> initialize() async {
     _lifeCycleObserver = _VideoAppLifeCycleObserver(this);
@@ -170,9 +169,9 @@ class AliPlayerController extends ValueNotifier<AliPlayerValue> {
         .receiveBroadcastStream()
         .listen(eventListener, onError: errorListener);
 
-    onDeviceOrientation = OrientationPlugin.onOrientationChange.listen((event) {
-      _currentOrientation = event;
-    });
+    // onDeviceOrientation = OrientationPlugin.onOrientationChange.listen((event) {
+    //   _currentOrientation = event;
+    // });
 
     prepare(dataSource);
     return initializingCompleter.future;
@@ -325,15 +324,15 @@ class AliPlayerController extends ValueNotifier<AliPlayerValue> {
   static Future<bool> setOrientationLandscape() async {
     SystemChrome.setPreferredOrientations(
         [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
-    if (_currentOrientation == DeviceOrientation.landscapeRight) {
-      SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight]);
-    } else if (_currentOrientation == DeviceOrientation.landscapeLeft) {
-      SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
-    } else {
-      SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight]);
-    }
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
+    // if (_currentOrientation == DeviceOrientation.landscapeRight) {
+    //   SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight]);
+    // } else if (_currentOrientation == DeviceOrientation.landscapeLeft) {
+    //   SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeLeft]);
+    // } else {
+    //   SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight]);
+    // }
+    // SystemChrome.setPreferredOrientations(
+    //     [DeviceOrientation.landscapeRight, DeviceOrientation.landscapeLeft]);
     return Future.value(true);
   }
 
