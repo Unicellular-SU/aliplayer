@@ -688,7 +688,7 @@ class UIPanelPanelState extends State<UIPanel> {
   }
 
   List<Widget> _speedContainer() {
-    List<double> list = [0.75, 1, 1.25, 1.5, 2];
+    List<double> list = [2, 1.25, 1, 0.75];
     List<Widget> widgets = [];
     list.forEach((speed) {
       widgets.add(Expanded(

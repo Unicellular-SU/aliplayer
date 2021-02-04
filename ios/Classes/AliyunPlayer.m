@@ -217,17 +217,15 @@
         old = _latestPixelBuffer;
     }
     
+    _latestPixelBuffer = CVPixelBufferRetain(pixelBuffer);
+    
     if(newBuffer){
         CFRelease(newBuffer);
     }
-    
+
     if (old && old != pixelBuffer) {
         CFRelease(old);
     }
-    
-    _latestPixelBuffer = CVPixelBufferRetain(pixelBuffer);
-    
-    
     if (_tid >= 0) {
         [_textureRegistry textureFrameAvailable:_tid];
     }
