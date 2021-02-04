@@ -139,6 +139,23 @@
         }
         
         [_aliPlayer setStsSource:source];
+    } else if ([sourceType isEqualToString:@"VidAuth"]) {
+        AVPVidAuthSource *source2 = [[AVPVidAuthSource alloc] initWithVid:dic[@"vid"] playAuth:dic[@"playAuth"] region:[self emptyIfNull:dic[@"region"]]];
+        
+        if (![self isNullOrEmpty:dic[@"playConfig"]]) {
+            NSDictionary *playConfig = dic[@"playConfig"];
+            if (![self isNullOrEmpty:playConfig[@"configMap"]]) {
+                NSDictionary *configMap = playConfig[@"configMap"];
+                if (![self isNullOrEmpty:configMap[@"PreviewTime"]]) {
+                    int previewTime = [configMap[@"PreviewTime"] intValue];
+                    VidPlayerConfigGenerator* vp = [[VidPlayerConfigGenerator alloc] init];
+                    [vp setPreviewTime: previewTime]; //试看
+                    source2.playConfig = [vp generatePlayerConfig];
+                }
+            }
+        }
+        
+        [_aliPlayer setAuthSource:source2];
     }
 }
 
