@@ -155,12 +155,12 @@ VidAuth _$VidAuthFromJson(Map<String, dynamic> json) {
     ..title = json['title'] as String
     ..quality = json['quality'] as String
     ..forceQuality = json['forceQuality'] as bool
-    ..formats = (json['formats'] as List)
-        .map((e) => _$enumDecode(_$VidMediaFormatEnumMap, e))
-        .toList()
-    ..definitions = (json['definitions'] as List)
-        .map((e) => _$enumDecode(_$VidDefinitionEnumMap, e))
-        .toList()
+    // ..formats = (json['formats'] as List)
+    //     .map((e) => _$enumDecode(_$VidMediaFormatEnumMap, e))
+    //     .toList()
+    // ..definitions = (json['definitions'] as List)
+    //     .map((e) => _$enumDecode(_$VidDefinitionEnumMap, e))
+    //     .toList()
     ..playConfig =
         VidPlayerConfigGen.fromJson(json['playConfig'] as Map<String, dynamic>)
     ..vid = json['vid'] as String
@@ -173,10 +173,10 @@ Map<String, dynamic> _$VidAuthToJson(VidAuth instance) => <String, dynamic>{
       'title': instance.title,
       'quality': instance.quality,
       'forceQuality': instance.forceQuality,
-      'formats':
-          instance.formats.map((e) => _$VidMediaFormatEnumMap[e]).toList(),
-      'definitions':
-          instance.definitions.map((e) => _$VidDefinitionEnumMap[e]).toList(),
+      // 'formats':
+      //     instance.formats.map((e) => _$VidMediaFormatEnumMap[e]).toList(),
+      // 'definitions':
+      //     instance.definitions.map((e) => _$VidDefinitionEnumMap[e]).toList(),
       'playConfig': instance.playConfig,
       'vid': instance.vid,
       'playAuth': instance.playAuth,
