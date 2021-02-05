@@ -1,10 +1,10 @@
 PODS:
   - aliplayer (0.0.1):
-    - AliPlayerSDK_iOS (~> 5.3.0)
+    - AliPlayerSDK_iOS (~> 5.1.6)
     - Flutter
-  - AliPlayerSDK_iOS (5.3.0):
-    - AliPlayerSDK_iOS/AliPlayerSDK (= 5.3.0)
-  - AliPlayerSDK_iOS/AliPlayerSDK (5.3.0)
+  - AliPlayerSDK_iOS (5.1.6):
+    - AliPlayerSDK_iOS/AliPlayerSDK (= 5.1.6)
+  - AliPlayerSDK_iOS/AliPlayerSDK (5.1.6)
   - Flutter (1.0.0)
   - orientation (0.0.1):
     - Flutter
@@ -37,8 +37,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/volume_control/ios"
 
 SPEC CHECKSUMS:
-  aliplayer: 4ffeb7dd8048f3e6327d4910c3ff588765b9ad52
-  AliPlayerSDK_iOS: 2b9a485672f9da87fd651a4424d2f5b873d5b50e
+  aliplayer: 223dadbe465767900520c69b9be3f8a689c54d00
+  AliPlayerSDK_iOS: d349d7f8acc0f86b0fccef9aa4e0f1369c938ca7
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   orientation: 6c9203efe86ce4cff379756910f18b2d745628c3
   screen: abd91ca7bf3426e1cc3646d27e9b2358d6bf07b0

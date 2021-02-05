@@ -16,7 +16,7 @@ A new Flutter plugin.
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
   s.dependency 'Flutter'
-  s.dependency 'AliPlayerSDK_iOS', "~> 5.3.0"
+  s.dependency 'AliPlayerSDK_iOS', "~> 5.1.6"
   s.platform = :ios, '9.0'
 
   # Flutter.framework does not contain a i386 slice.

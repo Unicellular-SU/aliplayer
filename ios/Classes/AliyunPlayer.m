@@ -12,6 +12,7 @@
 #import "AliyunPlayer/VidPlayerConfigGen.h"
 
 
+
 @implementation AliyunPlayer  {
     FlutterEventChannel *eventChannel;
     FlutterEventSink eventSink;
@@ -118,6 +119,8 @@
 - (void)setSource:(NSString *)sourceType sourceJson: (NSString *)sourceJson {
     NSData *data = [sourceJson dataUsingEncoding:NSUTF8StringEncoding];
     NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:nil];
+    NSLog(@"call 11 method:%@", sourceType);
+    NSLog(@"call 11 method:%@", sourceJson);
     if ([sourceType isEqualToString:@"UrlSource"]) {
         AVPUrlSource *source = [[AVPUrlSource alloc] urlWithString:dic[@"uri"]];
         [_aliPlayer setUrlSource:source];
@@ -140,7 +143,7 @@
         
         [_aliPlayer setStsSource:source];
     } else if ([sourceType isEqualToString:@"VidAuth"]) {
-        AVPVidAuthSource *source2 = [[AVPVidAuthSource alloc] initWithVid:dic[@"vid"] playAuth:dic[@"playAuth"] region:[self emptyIfNull:dic[@"region"]]];
+        AVPVidAuthSource *source = [[AVPVidAuthSource alloc] initWithVid:dic[@"vid"] playAuth:dic[@"playAuth"] region:[self emptyIfNull:dic[@"region"]]];
         
         if (![self isNullOrEmpty:dic[@"playConfig"]]) {
             NSDictionary *playConfig = dic[@"playConfig"];
@@ -150,12 +153,12 @@
                     int previewTime = [configMap[@"PreviewTime"] intValue];
                     VidPlayerConfigGenerator* vp = [[VidPlayerConfigGenerator alloc] init];
                     [vp setPreviewTime: previewTime]; //试看
-                    source2.playConfig = [vp generatePlayerConfig];
+                    source.playConfig = [vp generatePlayerConfig];
                 }
             }
         }
         
-        [_aliPlayer setAuthSource:source2];
+        [_aliPlayer setAuthSource:source];
     }
 }
 
@@ -303,6 +306,7 @@
 
 - (void)onError:(AliPlayer *)player errorModel:(AVPErrorModel *)errorModel {
     NSLog(@"onError:%@", errorModel.message);
+    NSLog(@"onError:%lu", (unsigned long)errorModel.code);
     eventSink(@{
         @"event": @"error",
         @"errorMsg": errorModel.message,

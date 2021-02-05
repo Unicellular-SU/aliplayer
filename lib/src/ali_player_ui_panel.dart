@@ -214,13 +214,25 @@ class UIPanelPanelState extends State<UIPanel> {
                   onPressed: () {
                     _playing ? controller.pause() : controller.play();
                   }),
-              Padding(
-                padding: EdgeInsets.only(right: 5.0, left: 5),
-                child: Text(
-                  '${_duration2String(_currentPos)}',
-                  style: TextStyle(fontSize: controller.fullScreen ? 14 : 12.0),
-                ),
-              ),
+              _duration?.inMilliseconds == null ||
+                      _duration?.inMilliseconds == 0
+                  ? Padding(
+                      padding: EdgeInsets.only(right: 5.0, left: 5),
+                      child: Text(
+                        'LIVE',
+                        style: TextStyle(
+                            fontSize: controller.fullScreen ? 16 : 14,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    )
+                  : Padding(
+                      padding: EdgeInsets.only(right: 5.0, left: 5),
+                      child: Text(
+                        '${_duration2String(_currentPos)}',
+                        style: TextStyle(
+                            fontSize: controller.fullScreen ? 14 : 12.0),
+                      ),
+                    ),
 
               _duration?.inMilliseconds == null ||
                       _duration?.inMilliseconds == 0
