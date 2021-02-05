@@ -457,12 +457,14 @@ class UIPanelPanelState extends State<UIPanel> {
                 }
               },
               onHorizontalDragStart: (_) {
+                if (isLive) return;
                 _fastPos = _currentPos;
                 setState(() {
                   _showFastbox = true;
                 });
               },
               onHorizontalDragUpdate: (DragUpdateDetails detail) {
+                if (isLive) return;
                 setState(() {
                   int res =
                       _fastPos.inMilliseconds + detail.delta.dx.toInt() * 1000;
@@ -474,6 +476,7 @@ class UIPanelPanelState extends State<UIPanel> {
                 });
               },
               onHorizontalDragEnd: (_) {
+                if (isLive) return;
                 controller.seekTo(_fastPos);
                 setState(() {
                   _showFastbox = false;
