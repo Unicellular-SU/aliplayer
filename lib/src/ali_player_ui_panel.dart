@@ -35,6 +35,11 @@ class UIPanelPanelState extends State<UIPanel> {
   Duration _fastPos = Duration();
   int _buffered = 0;
 
+  bool get isLive =>
+      controller.isLive ||
+      _duration?.inMilliseconds == null ||
+      _duration?.inMilliseconds == 0;
+
   // Duration _bufferPos = Duration();
   bool _playing = false;
   bool _prepared = false;
@@ -214,8 +219,7 @@ class UIPanelPanelState extends State<UIPanel> {
                   onPressed: () {
                     _playing ? controller.pause() : controller.play();
                   }),
-              _duration?.inMilliseconds == null ||
-                      _duration?.inMilliseconds == 0
+              isLive
                   ? Padding(
                       padding: EdgeInsets.only(right: 5.0, left: 5),
                       child: Text(
@@ -234,8 +238,7 @@ class UIPanelPanelState extends State<UIPanel> {
                       ),
                     ),
 
-              _duration?.inMilliseconds == null ||
-                      _duration?.inMilliseconds == 0
+              isLive
                   ? Expanded(
                       child: Center(),
                     )
@@ -267,8 +270,7 @@ class UIPanelPanelState extends State<UIPanel> {
                     ),
 
               // duration / position
-              _duration?.inMilliseconds == null ||
-                      _duration?.inMilliseconds == 0
+              isLive
                   ? Container(child: const Text(""))
                   : Padding(
                       padding: EdgeInsets.only(right: 5.0, left: 5),
@@ -337,9 +339,7 @@ class UIPanelPanelState extends State<UIPanel> {
 
   Widget _speedPanel(List<Widget> data) {
     return Offstage(
-      offstage: (_duration?.inMilliseconds == null ||
-              _duration?.inMilliseconds == 0) ||
-          !_speedShow,
+      offstage: isLive || !_speedShow,
       child: Stack(children: [
         GestureDetector(
           onTap: () {
@@ -373,9 +373,7 @@ class UIPanelPanelState extends State<UIPanel> {
 
   Widget _qualityPanel(List<Widget> data) {
     return Offstage(
-      offstage: (_duration?.inMilliseconds == null ||
-              _duration?.inMilliseconds == 0) ||
-          !_qualityShow,
+      offstage: isLive || !_qualityShow,
       child: Stack(children: [
         GestureDetector(
           onTap: () {

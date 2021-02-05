@@ -39,6 +39,8 @@ class AliPlayerController extends ValueNotifier<AliPlayerValue> {
 
   bool fullScreen = false;
 
+  bool isLive = false;
+
   /// 视频总时长
   Duration duration;
   Duration position;
@@ -173,11 +175,11 @@ class AliPlayerController extends ValueNotifier<AliPlayerValue> {
     //   _currentOrientation = event;
     // });
 
-    prepare(dataSource);
+    prepare();
     return initializingCompleter.future;
   }
 
-  Future<void> prepare(DataSource dataSource) async {
+  Future<void> prepare() async {
     await _channel.invokeMethod('player_prepare', {"textureId": textureId});
   }
 
@@ -220,6 +222,11 @@ class AliPlayerController extends ValueNotifier<AliPlayerValue> {
       'type': type,
       'source': convert.json.encode(dataSource)
     });
+  }
+
+  void setLive(bool isLive) {
+    this.isLive = isLive;
+    notifyListeners();
   }
 
   Future<void> _applyLooping() async {
