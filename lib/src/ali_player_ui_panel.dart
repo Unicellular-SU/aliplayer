@@ -71,7 +71,9 @@ class UIPanelPanelState extends State<UIPanel> {
     "SD": "高清",
     "HD": "超清",
     "2K": "2K",
-    "4K": "4K"
+    "4K": "4K",
+    "video": "默认视频",
+    "audio": "默认音频"
   };
   final barHeight = 40.0;
   static const AliSliderColors sliderColors = AliSliderColors(
