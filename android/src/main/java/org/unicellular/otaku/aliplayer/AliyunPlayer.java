@@ -24,12 +24,12 @@ import org.unicellular.otaku.aliplayer.listener.OnAVPTrackChangedListener;
 import org.unicellular.otaku.aliplayer.listener.OnAVPVideoRenderedListener;
 import org.unicellular.otaku.aliplayer.listener.OnAVPVideoSizeChangedListener;
 import org.unicellular.otaku.aliplayer.util.SourceUtil;
+import org.unicellular.otaku.aliplayer.util.StrKit;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.hutool.core.util.StrUtil;
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -131,7 +131,7 @@ public final class AliyunPlayer {
             case "player_set_source":
                 String type = call.argument("type");
                 String source = call.argument("source");
-                if (StrUtil.isBlank(type) || StrUtil.isBlank(source)) {
+                if (StrKit.isBlank(type) || StrKit.isBlank(source)) {
                     result.error(
                             "Param blank",
                             "Param type and source cannot be blank",

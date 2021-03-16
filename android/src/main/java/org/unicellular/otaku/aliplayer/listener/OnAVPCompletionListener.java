@@ -4,7 +4,8 @@ import com.aliyun.player.IPlayer;
 
 import org.unicellular.otaku.aliplayer.AliQueuingEventSink;
 
-import cn.hutool.core.map.MapUtil;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 播放器播放完成监听
@@ -19,9 +20,13 @@ public class OnAVPCompletionListener implements IPlayer.OnCompletionListener {
 
     @Override
     public void onCompletion() {
+        Map<String, Object> map = new HashMap<>(4);
+        map.put("event", "playEvent");
+        map.put("value", 3);
+
         //播放完成事件
 //        eventSink.success(MapUtil.builder("event", "completion").build());
-        eventSink.success(MapUtil.builder("event", (Object) "playEvent").put("value",3).build());
+        eventSink.success(map);
 
     }
 }

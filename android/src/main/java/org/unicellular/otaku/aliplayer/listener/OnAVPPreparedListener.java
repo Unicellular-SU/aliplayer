@@ -7,9 +7,10 @@ import com.aliyun.player.IPlayer;
 
 import org.unicellular.otaku.aliplayer.AliQueuingEventSink;
 import org.unicellular.otaku.aliplayer.AliyunPlayer;
+import org.unicellular.otaku.aliplayer.util.JsonMarker;
 
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.json.JSONUtil;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 准备完成监听
@@ -29,16 +30,22 @@ public class OnAVPPreparedListener implements IPlayer.OnPreparedListener {
     @Override
     public void onPrepared() {
         this.aliyunPlayer.initialized();
+
+        Map<String, Object> map = new HashMap<>(8);
+        map.put("event", "prepared");
+        map.put("duration", mAliPlayer.getDuration());
+        map.put("width", mAliPlayer.getVideoWidth());
+        map.put("height", mAliPlayer.getVideoHeight());
+        
         //准备成功事件
-        eventSink.success(MapUtil.builder("event", (Object) "prepared")
-                .put("duration", mAliPlayer.getDuration())
-                .put("width", mAliPlayer.getVideoWidth())
-                .put("height", mAliPlayer.getVideoHeight())
-                .build());
-        Log.i("prepared", JSONUtil.toJsonStr(MapUtil.builder("event", (Object) "prepared")
-                .put("duration", mAliPlayer.getDuration())
-                .put("width", mAliPlayer.getVideoWidth())
-                .put("height", mAliPlayer.getVideoHeight())
-                .build()));
+        eventSink.success(map);
+
+        String msg;
+        try {
+            msg = JsonMarker.instance().write(map);
+        } catch (Throwable e) {
+            msg = e.getMessage();
+        }
+        Log.i("prepared", msg);
     }
 }

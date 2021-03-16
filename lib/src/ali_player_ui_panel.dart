@@ -417,47 +417,52 @@ class UIPanelPanelState extends State<UIPanel> {
               onDoubleTap: () {
                 this._playOrPause();
               },
-              onVerticalDragStart: (DragStartDetails detail) async {
-                if (detail.localPosition.dx <
-                    MediaQuery.of(context).size.width / 2) {
-                  _brightness = await Screen.brightness;
-                  _changeState = 1;
-                } else {
-                  _changeState = 0;
-                  _volume = await VolumeControl.volume;
-                }
-              },
+              onVerticalDragStart: controller.fullScreen
+                  ? (DragStartDetails detail) async {
+                      if (detail.localPosition.dx <
+                          MediaQuery.of(context).size.width / 2) {
+                        _brightness = await Screen.brightness;
+                        _changeState = 1;
+                      } else {
+                        _changeState = 0;
+                        _volume = await VolumeControl.volume;
+                      }
+                    }
+                  : null,
               onVerticalDragEnd: (_) {
                 setState(() {
                   _showSound = false;
                 });
               },
-              onVerticalDragUpdate: (DragUpdateDetails detail) {
-                setState(() {
-                  _showSound = true;
-                });
-                if (_changeState == 1) {
-                  double brightness = _brightness - (detail.delta.dy / 100);
-                  if (brightness < 0.01) {
-                    _brightness = 0.01;
-                  } else if (brightness > 1) {
-                    _brightness = 1.0;
-                  } else {
-                    _brightness = brightness;
-                  }
-                  Screen.setBrightness(_brightness);
-                } else {
-                  double volume = _volume - (detail.delta.dy / 100);
-                  if (volume < 0) {
-                    _volume = 0;
-                  } else if (volume > 1) {
-                    _volume = 1.0;
-                  } else {
-                    _volume = volume;
-                  }
-                  VolumeControl.setVolume(_volume);
-                }
-              },
+              onVerticalDragUpdate: controller.fullScreen
+                  ? (DragUpdateDetails detail) {
+                      setState(() {
+                        _showSound = true;
+                      });
+                      if (_changeState == 1) {
+                        double brightness =
+                            _brightness - (detail.delta.dy / 100);
+                        if (brightness < 0.01) {
+                          _brightness = 0.01;
+                        } else if (brightness > 1) {
+                          _brightness = 1.0;
+                        } else {
+                          _brightness = brightness;
+                        }
+                        Screen.setBrightness(_brightness);
+                      } else {
+                        double volume = _volume - (detail.delta.dy / 100);
+                        if (volume < 0) {
+                          _volume = 0;
+                        } else if (volume > 1) {
+                          _volume = 1.0;
+                        } else {
+                          _volume = volume;
+                        }
+                        VolumeControl.setVolume(_volume);
+                      }
+                    }
+                  : null,
               onHorizontalDragStart: (_) {
                 if (isLive) return;
                 _fastPos = _currentPos;

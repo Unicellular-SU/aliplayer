@@ -6,7 +6,8 @@ import android.util.LongSparseArray;
 
 import androidx.annotation.NonNull;
 
-import cn.hutool.core.util.StrUtil;
+import org.unicellular.otaku.aliplayer.util.StrKit;
+
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.BinaryMessenger;
 import io.flutter.plugin.common.EventChannel;
@@ -93,7 +94,7 @@ public class AliplayerPlugin implements FlutterPlugin, MethodCallHandler {
             if (call.method.equals("player_create")) {
                 String type = call.argument("type");
                 String source = call.argument("source");
-                if (StrUtil.isBlank(type) || StrUtil.isBlank(source)) {
+                if (StrKit.isBlank(type) || StrKit.isBlank(source)) {
 //          result.error(
 //                  "Param blank",
 //                  "Param type and source cannot be blank",

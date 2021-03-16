@@ -2,9 +2,6 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-// ignore_for_file: public_member_api_docs
-
-import 'dart:convert';
 import 'dart:math';
 
 import 'package:aliplayer/aliplayer.dart';
@@ -233,19 +230,21 @@ class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
           if (index == 0) {
             return FlatButton(
                 onPressed: () {
-                  VidSts vidSts = VidSts();
-                  vidSts.accessKeyId = "accessKeyId";
-                  vidSts.accessKeySecret = "accessKeySecret";
-                  vidSts.region = "region";
-                  vidSts.vid = "vid";
+                  // VidSts vidSts = VidSts();
+                  // vidSts.accessKeyId = "accessKeyId";
+                  // vidSts.accessKeySecret = "accessKeySecret";
+                  // vidSts.region = "region";
+                  // vidSts.vid = "vid";
+                  //
+                  // vidSts.securityToken = "securityToken";
+                  // VidPlayerConfigGen configGen = VidPlayerConfigGen();
+                  // configGen.configMap["PreviewTime"] = 10;
+                  // vidSts.playConfig = configGen;
 
-                  vidSts.securityToken = "securityToken";
-                  VidPlayerConfigGen configGen = VidPlayerConfigGen();
-                  configGen.configMap["PreviewTime"] = 10;
-                  vidSts.playConfig = configGen;
-
-                  print(jsonEncode(vidSts.toJson()));
-                  _controller.setDataSource(vidSts);
+                  // print(jsonEncode(vidSts.toJson()));
+                  _controller.setDataSource(UrlSource()
+                    ..uri =
+                        "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4");
                 },
                 child: Text("下一个"));
           }

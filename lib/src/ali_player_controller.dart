@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert' as convert;
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
@@ -291,16 +290,17 @@ class AliPlayerController extends ValueNotifier<AliPlayerValue> {
   }
 
   void exitFullScreen(context) async {
-    if (Platform.isIOS) {
-      if (MediaQuery.of(context).orientation == Orientation.portrait) {
-        await setOrientationLandscape();
-      } else if (MediaQuery.of(context).orientation == Orientation.landscape) {
-        await setOrientationPortrait();
-      }
-    } else {
-      print('退出全屏');
-      Navigator.of(context).pop();
-    }
+    // if (Platform.isIOS) {
+    //   if (MediaQuery.of(context).orientation == Orientation.portrait) {
+    //     await setOrientationLandscape();
+    //   } else if (MediaQuery.of(context).orientation == Orientation.landscape) {
+    //     await setOrientationPortrait();
+    //   }
+    // } else {
+    //   print('退出全屏');
+    //   Navigator.of(context).pop();
+    // }
+    Navigator.of(context).pop();
     fullScreen = false;
     eventBus.fire(AVPScreenStatus.NORMAL);
   }
@@ -313,11 +313,8 @@ class AliPlayerController extends ValueNotifier<AliPlayerValue> {
 
     await SystemChrome.setEnabledSystemUIOverlays([]);
     await setOrientationLandscape();
-    if (Platform.isAndroid) {
-      await Navigator.of(context).push(route);
-      // widget.player.exitFullScreen();
-      await setOrientationPortrait();
-    }
+    await Navigator.of(context).push(route);
+    await setOrientationPortrait();
     await SystemChrome.setEnabledSystemUIOverlays(
         [SystemUiOverlay.top, SystemUiOverlay.bottom]);
   }

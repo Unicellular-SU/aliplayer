@@ -5,7 +5,8 @@ import com.aliyun.player.bean.ErrorInfo;
 
 import org.unicellular.otaku.aliplayer.AliQueuingEventSink;
 
-import cn.hutool.core.map.MapUtil;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 错误事件监听
@@ -20,11 +21,13 @@ public class OnAVPErrorListener implements IPlayer.OnErrorListener {
 
     @Override
     public void onError(ErrorInfo errorInfo) {
+        Map<String, Object> map = new HashMap<>(8);
+        map.put("event", "error");
+        map.put("errorCode", errorInfo.getCode().getValue());
+        map.put("errorEvent", Integer.toHexString(errorInfo.getCode().getValue()));
+        map.put("errorMsg", errorInfo.getMsg());
+
         // 出错事件
-        eventSink.success(MapUtil.builder("event", (Object) "error")
-                .put("errorCode", errorInfo.getCode().getValue())
-                .put("errorEvent", Integer.toHexString(errorInfo.getCode().getValue()))
-                .put("errorMsg", errorInfo.getMsg())
-                .build());
+        eventSink.success(map);
     }
 }
