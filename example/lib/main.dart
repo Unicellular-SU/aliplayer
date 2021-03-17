@@ -209,61 +209,80 @@ class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
 
   @override
   Widget build(BuildContext context) {
-    return NestedScrollView(
-      headerSliverBuilder: (context, innerBoxIsScrolled) {
-        return [
-          SliverPersistentHeader(
-            pinned: _isPlay,
-            delegate: _SliverDelegate(
-              child: Stack(
-                children: [
-                  AliPlayer(
-                    _controller,
-                  ),
-                  // _PlayPauseOverlay(controller: _controller),
-                ],
-              ),
-              maxHeight: MediaQuery.of(context).size.width / 16 * 9,
-              minHeight: MediaQuery.of(context).size.width / 16 * 9,
-            ),
-          )
-        ];
-      },
-      body: ListView.builder(
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return FlatButton(
-                onPressed: () {
-                  // VidSts vidSts = VidSts();
-                  // vidSts.accessKeyId = "accessKeyId";
-                  // vidSts.accessKeySecret = "accessKeySecret";
-                  // vidSts.region = "region";
-                  // vidSts.vid = "vid";
-                  //
-                  // vidSts.securityToken = "securityToken";
-                  // VidPlayerConfigGen configGen = VidPlayerConfigGen();
-                  // configGen.configMap["PreviewTime"] = 10;
-                  // vidSts.playConfig = configGen;
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Container(
+            height: MediaQuery.of(context).size.width / 16 * 9,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.blue,
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            height: MediaQuery.of(context).size.width / 16 * 9,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.teal,
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            height: MediaQuery.of(context).size.width / 16 * 9,
+            width: MediaQuery.of(context).size.width,
+            child: AliPlayer(_controller),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: FlatButton(
+            onPressed: () {
+              // VidSts vidSts = VidSts();
+              // vidSts.accessKeyId = "accessKeyId";
+              // vidSts.accessKeySecret = "accessKeySecret";
+              // vidSts.region = "region";
+              // vidSts.vid = "vid";
+              //
+              // vidSts.securityToken = "securityToken";
+              // VidPlayerConfigGen configGen = VidPlayerConfigGen();
+              // configGen.configMap["PreviewTime"] = 10;
+              // vidSts.playConfig = configGen;
 
-                  // print(jsonEncode(vidSts.toJson()));
-                  _controller.setDataSource(UrlSource()
-                    ..uri =
-                        "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4");
-                },
-                child: Text("下一个"));
-          }
-          return GestureDetector(
-            child: Text("TESTSTTSTTSTTSTSTTS$index"),
-            onTap: () {
-              setState(() {
-                _isPlay = !_isPlay;
-              });
-              print(_isPlay);
+              // print(jsonEncode(vidSts.toJson()));
+              _controller.setDataSource(UrlSource()
+                ..uri =
+                    "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4");
             },
-          );
-        },
-        itemCount: 1000,
-      ),
+            child: Text("下一个"),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            height: MediaQuery.of(context).size.width / 16 * 9,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.red,
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            height: MediaQuery.of(context).size.width / 16 * 9,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.amberAccent,
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            height: MediaQuery.of(context).size.width / 16 * 9,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.deepOrange,
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Container(
+            height: MediaQuery.of(context).size.width / 16 * 9,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.tealAccent,
+          ),
+        ),
+      ],
     );
     // return SingleChildScrollView(
     //   child: Column(

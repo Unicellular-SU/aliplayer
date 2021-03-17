@@ -430,11 +430,13 @@ class UIPanelPanelState extends State<UIPanel> {
                       }
                     }
                   : null,
-              onVerticalDragEnd: (_) {
-                setState(() {
-                  _showSound = false;
-                });
-              },
+              onVerticalDragEnd: controller.fullScreen
+                  ? (_) {
+                      setState(() {
+                        _showSound = false;
+                      });
+                    }
+                  : null,
               onVerticalDragUpdate: controller.fullScreen
                   ? (DragUpdateDetails detail) {
                       setState(() {
