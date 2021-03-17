@@ -247,9 +247,13 @@ class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
               // vidSts.playConfig = configGen;
 
               // print(jsonEncode(vidSts.toJson()));
-              _controller.setDataSource(UrlSource()
-                ..uri =
-                    "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4");
+              var config = VidPlayerConfigGen();
+              config.setPreviewTime(3000);
+              VidAuth vidAuth = VidAuth()
+                ..playConfig = config
+                ..playAuth = ""
+                ..vid = "";
+              _controller.setDataSource(vidAuth);
             },
             child: Text("下一个"),
           ),

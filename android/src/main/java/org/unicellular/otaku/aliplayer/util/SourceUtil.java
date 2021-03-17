@@ -1,11 +1,16 @@
 package org.unicellular.otaku.aliplayer.util;
 
 import com.aliyun.player.AliPlayer;
+import com.aliyun.player.VidPlayerConfigGen;
 import com.aliyun.player.source.LiveSts;
 import com.aliyun.player.source.UrlSource;
 import com.aliyun.player.source.VidAuth;
 import com.aliyun.player.source.VidMps;
 import com.aliyun.player.source.VidSts;
+
+import org.unicellular.otaku.aliplayer.bean.VidSource;
+
+import java.util.Map;
 
 public class SourceUtil {
 
@@ -59,7 +64,42 @@ public class SourceUtil {
 
     private static VidAuth getVidAuth(String source) {
         try {
-            return JsonMarker.instance().from(source, VidAuth.class);
+            VidSource vidSource = JsonMarker.instance().from(source, VidSource.class);
+            Map<String, Object> sourceMap = JsonMarker.instance().toMap(source, Object.class);
+            VidAuth vidAuth = new VidAuth();
+            if (sourceMap.containsKey("vid")) {
+                Object vid = sourceMap.get("vid");
+                if (vid != null) {
+                    vidAuth.setVid(vid.toString());
+                }
+            }
+            if (sourceMap.containsKey("playAuth")) {
+                Object playAuth = sourceMap.get("playAuth");
+                if (playAuth != null) {
+                    vidAuth.setPlayAuth(playAuth.toString());
+                }
+            }
+            if (sourceMap.containsKey("region")) {
+                Object region = sourceMap.get("region");
+                if (region != null) {
+                    vidAuth.setRegion(region.toString());
+                }
+            }
+            // 按照技术总监要求只解析用到的试看
+            VidPlayerConfigGen config = new VidPlayerConfigGen();
+            if (vidSource.getPlayConfig() != null) {
+                Map<String, Object> configMap = vidSource.getPlayConfig().getConfigMap();
+                if (configMap != null) {
+                    if (configMap.containsKey("PreviewTime")) {
+                        Object previewTime = configMap.get("PreviewTime");
+                        if (previewTime != null) {
+                            config.setPreviewTime((Integer) previewTime);
+                        }
+                    }
+                }
+            }
+            vidAuth.setPlayConfig(config);
+            return vidAuth;
         } catch (Exception e) {
             e.printStackTrace();
         }
