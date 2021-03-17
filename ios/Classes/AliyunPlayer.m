@@ -27,6 +27,9 @@
     int64_t _tid;
     
     UIView *playerView;
+    
+    // 是不是第一次走软解
+    BOOL isRawFirst;
 }
 
 
@@ -54,6 +57,8 @@
         _aliPlayer.renderDelegate = self;
         _aliPlayer.scalingMode = AVP_SCALINGMODE_SCALEASPECTFILL;
         _aliPlayer.enableHardwareDecoder = YES;
+        
+        isRawFirst = NO;
         
         [self messenger:[registrar messenger]];
     }
@@ -216,6 +221,19 @@
         pixelBuffer = _latestPixelBuffer;
     }
     return pixelBuffer;
+}
+
+- (BOOL) onVideoRawBuffer:(uint8_t **)buffer lineSize:(int32_t *)lineSize pts:(int64_t)pts width:(int32_t)width height:(int32_t)height{
+    if(!isRawFirst){
+        if(eventSink){
+            eventSink(@{
+                @"event": @"playEvent",
+                @"value": @(11)
+                      });
+        }
+        isRawFirst = YES;
+    }
+    return YES;
 }
 
 - (BOOL)onVideoPixelBuffer:(CVPixelBufferRef)pixelBuffer pts:(int64_t)pts {

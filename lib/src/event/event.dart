@@ -29,8 +29,11 @@ enum AVPEventType {
   ///轨道切换失败9
   AVPEventTrackChangeFail,
 
-  ///Player Created
+  ///Player Created 10
   AVPEventCreated,
+
+  /// 软解失败11
+  AVPEventRawFail,
 }
 enum AVPStatus {
   ///空转，闲时，静态
