@@ -186,9 +186,13 @@ class _BumbleBeeRemoteVideoState extends State<_BumbleBeeRemoteVideo> {
     UrlSource urlSource = UrlSource();
     urlSource.uri = 'https://alivc-demo-cms.alicdn.com/video/videoAD.mp4';
     urlSource.title = '测试';
-    _controller = AliPlayerController(dataSource: urlSource, actions: [
-      IconButton(icon: Icon(Icons.shop), color: Colors.white, onPressed: () {})
-    ]);
+    _controller = AliPlayerController(
+        dataSource: urlSource,
+        canFullScreen: false,
+        actions: [
+          IconButton(
+              icon: Icon(Icons.shop), color: Colors.white, onPressed: () {})
+        ]);
 
     _controller.addListener(() {
       print(_controller.position);

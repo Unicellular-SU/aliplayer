@@ -15,7 +15,8 @@ import 'inner_view.dart';
 final MethodChannel _channel = const MethodChannel('aliplayer');
 
 class AliPlayerController extends ValueNotifier<AliPlayerValue> {
-  AliPlayerController({this.dataSource, this.actions})
+  AliPlayerController(
+      {this.dataSource, this.canFullScreen = true, this.actions})
       : super(AliPlayerValue(duration: null));
 
   int _textureId;
@@ -24,6 +25,7 @@ class AliPlayerController extends ValueNotifier<AliPlayerValue> {
   EventBus eventBus = EventBus();
 
   final DataSource dataSource;
+  final bool canFullScreen;
   final List<Widget> actions;
 
   bool _isDisposed = false;

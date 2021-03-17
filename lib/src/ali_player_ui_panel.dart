@@ -313,24 +313,25 @@ class UIPanelPanelState extends State<UIPanel> {
                       ),
                     )
                   : Center(),
-              IconButton(
-                icon: ImageIcon(
-                  controller.fullScreen
-                      ? AssetImage('images/exitFullscreen.png',
-                          package: "aliplayer")
-                      : AssetImage('images/fullscreen.png',
-                          package: "aliplayer"),
-                  size: 40,
+              if (controller.canFullScreen)
+                IconButton(
+                  icon: ImageIcon(
+                    controller.fullScreen
+                        ? AssetImage('images/exitFullscreen.png',
+                            package: "aliplayer")
+                        : AssetImage('images/fullscreen.png',
+                            package: "aliplayer"),
+                    size: 40,
+                    color: Colors.white,
+                  ),
+                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
                   color: Colors.white,
-                ),
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                color: Colors.white,
-                onPressed: () {
-                  widget.player.fullScreen
-                      ? controller.exitFullScreen(context)
-                      : controller.enterFullScreen(context);
-                },
-              )
+                  onPressed: () {
+                    widget.player.fullScreen
+                        ? controller.exitFullScreen(context)
+                        : controller.enterFullScreen(context);
+                  },
+                )
               //
             ],
           ),
